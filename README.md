@@ -1,4 +1,4 @@
-# ansible-role-sipp [![Build Status](https://secure.travis-ci.org/davehorton/ansible-role-drachtio.png)](http://travis-ci.org/davehorton/ansible-role-drachtio)
+# ansible-role-sipp [![Build Status](https://secure.travis-ci.org/davehorton/ansible-role-sipp.png)](http://travis-ci.org/davehorton/ansible-role-sipp)
 
 This is an ansible role for building [sipp](http://sipp.sourceforge.net). The playbook builds sipp with support for pcap play as well as rtp streaming.
 
