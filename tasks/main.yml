@@ -1,0 +1,39 @@
+--- 
+  - name: Install build tools
+    apt: name={{ item }} state=latest
+    with_items:
+        - 'gcc'
+        - 'g++'
+        - 'make'
+        - 'build-essential'
+        - 'git'
+        - 'autoconf'
+        - 'curl'
+        - 'libtool'
+        - 'libtool-bin'
+        - 'libssl-dev'
+        - 'libcurl4-openssl-dev'
+        - 'libz-dev'
+        - 'ncurses-dev'
+        - 'libpcap-dev'
+
+  - name: make source directory writeable
+    file: path=/usr/local/src state=directory mode=0777
+
+  - name: check out sipp 
+    git: repo=https://github.com/SIPp/sipp.git
+          dest=/usr/local/src/sipp
+          version={{sippVersion}}
+          depth=50
+          accept_hostkey=yes
+          force=yes
+    become: no
+
+  - name: build sipp
+    shell: ./build.sh  --with-rtpstream --with-pcap && make install
+    become: yes
+    args:
+      executable: /bin/bash
+      chdir: /usr/local/src/sipp/
+      creates: /usr/local/bin/sipp
+
